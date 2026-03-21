@@ -1,0 +1,13 @@
+# Always LF for shell scripts — they run on Linux (WSL2)
+scripts/*.sh text eol=lf
+deploy.sh text eol=lf
+webhook/*.sh text eol=lf
+setup text eol=lf
+bin/* text eol=lf
+browse/src/*.ts text eol=lf
+
+# Markdown can be either
+*.md text=auto
+
+# Everything else — auto
+* text=auto
