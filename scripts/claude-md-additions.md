@@ -20,13 +20,32 @@ If no active project, read `projects/QUEUE.md` and pick up the first `queued` pr
 The heartbeat (run by cron every 30 min) handles this automatically, but on manual session
 start you should self-initiate without waiting for the heartbeat.
 
+## Windows Workspace
+
+The designated Windows workspace is at the path stored in `WINDOWS_WORKSPACE` in `~/.gstack/env`.
+From WSL2 this is accessible at `/mnt/c/...` (or the equivalent mount for the drive).
+
+**You may freely:**
+- Read, write, and execute files inside `$WINDOWS_WORKSPACE`
+- Run PowerShell scripts located inside `$WINDOWS_WORKSPACE`
+- Create subfolders and projects within `$WINDOWS_WORKSPACE`
+
+**Always escalate before:**
+- Touching anything outside `$WINDOWS_WORKSPACE` on the Windows host
+- Running `powershell.exe` commands that affect system state (services, registry, firewall, scheduled tasks)
+- Accessing `/mnt/c/Users`, `/mnt/c/Windows`, `/mnt/c/Program Files`, or any NAS mount
+- Anything that could affect Plex, NAS backups, or Windows system stability
+
+If you are unsure whether a path is inside the workspace, escalate.
+
 ## Escalation Policy
 
 Escalate to Discord and pause work (set `status: blocked` in `projects/active/STATE.md`) when:
 
 - A permission or access decision you are not confident about
 - A choice between two reasonable paths with meaningfully different outcomes
-- Anything that touches the NAS, Plex config, or system-level files outside the project scope
+- Any Windows host operation outside the designated workspace
+- Anything that touches the NAS, Plex config, or system-level files
 - Three consecutive failed attempts at the same problem
 - Missing credentials or secrets required to continue
 
@@ -46,3 +65,4 @@ Do not block all work — continue with anything that does not require the block
 - Running tests, linting, formatting
 - Reading files, searching the codebase, writing documentation
 - Standard git operations (commit, branch, push to non-main branches)
+- PowerShell scripts inside `$WINDOWS_WORKSPACE`

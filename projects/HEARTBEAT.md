@@ -52,6 +52,7 @@ Read `projects/QUEUE.md`. Find the first row with status `queued`.
 Escalate to Discord and pause (set `status: blocked` in STATE.md) when you hit:
 - A permission or access decision you are not confident about
 - A choice between two reasonable paths with meaningfully different outcomes
+- Any Windows host operation outside the designated workspace (`$WINDOWS_WORKSPACE` in `~/.gstack/env`)
 - Anything that touches the NAS, Plex config, or system-level files
 - Three consecutive failed attempts at the same problem
 - A task that requires credentials or secrets not available in the environment
