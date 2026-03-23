@@ -89,7 +89,7 @@ ok "origin → $(git remote get-url origin)"
 # ─── Step 4: ~/.gstack/env ────────────────────────────────────────────────────
 step "Configuring ~/.gstack/env..."
 
-mkdir -p "$HOME/.gstack"
+mkdir -p "$HOME/.gstack" "$HOME/.gstack/logs"
 
 if [ "$NON_INTERACTIVE" -eq 0 ]; then
   # Load existing values as defaults
@@ -211,7 +211,7 @@ else
   # Start Cloudflare Tunnel if configured
   if command -v cloudflared >/dev/null 2>&1 && [ -f "$HOME/.cloudflared/config.yml" ]; then
     tmux new-window -t claudecore -n "tunnel" \
-      "cloudflared tunnel run assistant 2>&1 | tee -a $LOG_DIR/tunnel.log"
+      "cloudflared tunnel run assistant 2>&1 | tee -a $HOME/.gstack/logs/tunnel.log"
     ok "Cloudflare Tunnel started (tmux window: tunnel)."
   else
     warn "Cloudflare Tunnel not configured. Run scripts/cloudflare-setup.sh first, then re-run deploy.sh."

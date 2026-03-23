@@ -38,7 +38,7 @@ import sys, json
 print(json.dumps(sys.stdin.read()))
 ")
 
-curl -s -X POST "$DISCORD_WEBHOOK_URL" \
+curl -s --max-time 10 -X POST "$DISCORD_WEBHOOK_URL" \
   -H "Content-Type: application/json" \
   -d "{\"content\": $ESCAPED}" \
   > /dev/null
